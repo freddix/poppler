@@ -151,14 +151,14 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig
-%postun	-p /sbin/ldconfig
+%post	-p /usr/sbin/ldconfig
+%postun	-p /usr/sbin/ldconfig
 
-%post	glib -p /sbin/ldconfig
-%postun	glib -p /sbin/ldconfig
+%post	glib -p /usr/sbin/ldconfig
+%postun	glib -p /usr/sbin/ldconfig
 
-%post	qt4 -p /sbin/ldconfig
-%postun	qt4 -p /sbin/ldconfig
+%post	qt4 -p /usr/sbin/ldconfig
+%postun	qt4 -p /usr/sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
