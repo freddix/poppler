@@ -1,15 +1,15 @@
-%define		data_ver	0.4.5
+%define		data_ver	0.4.6
 
 Summary:	PDF rendering library
 Name:		poppler
-Version:	0.20.3
+Version:	0.20.5
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	28c40266f374e1960a7bcead17d39f96
+# Source0-md5:	8a80ae83eb7a327b031808d09ee1d54d
 Source1:	http://poppler.freedesktop.org/%{name}-data-%{data_ver}.tar.gz
-# Source1-md5:	448dd7c5077570e340340706cef931aa
+# Source1-md5:	a8a7ca808827dd674faba6e4fc73b471
 URL:		http://poppler.freedesktop.org/
 BuildRequires:	QtGui-devel
 BuildRequires:	QtTest-devel
