@@ -2,12 +2,12 @@
 
 Summary:	PDF rendering library
 Name:		poppler
-Version:	0.24.5
+Version:	0.26.1
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	334f2ac95cc8039f2a57fe63e4a81c69
+# Source0-md5:	3e864e1e94fc8432e90afe9bab1a5603
 Source1:	http://poppler.freedesktop.org/%{name}-data-%{data_ver}.tar.gz
 # Source1-md5:	a8a7ca808827dd674faba6e4fc73b471
 URL:		http://poppler.freedesktop.org/
@@ -45,14 +45,6 @@ Requires:	gtk-doc-common
 
 %description apidocs
 Poppler API documentation.
-
-%package gir
-Summary:	GObject introspection data
-Group:		Libraries
-Requires:	gobject-introspection-data
-
-%description gir
-GObject introspection data for %{name}.
 
 %package cpp
 Summary:	Cpp wrapper for poppler
@@ -123,6 +115,8 @@ Package contains utilites for PDF files. These utilities allow to
 %prep
 %setup -q -a1
 
+%{__sed} -i "s/\ demo$//" glib/Makefile.am
+
 %build
 %{__gtkdocize}
 %{__libtoolize}
@@ -148,6 +142,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	pkgdatadir=%{_datadir}/poppler
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -165,6 +161,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %ghost %{_libdir}/libpoppler.so.??
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
+%{_libdir}/girepository-1.0/Poppler-0.18.typelib
 %{_datadir}/poppler
 
 %files devel
@@ -176,7 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/poppler-cairo.pc
 %{_pkgconfigdir}/poppler.pc
 %{_pkgconfigdir}/poppler-splash.pc
-%{_datadir}/gir-1.0/Poppler-0.*.gir
+%{_datadir}/gir-1.0/Poppler-0.18.gir
 
 %files apidocs
 %defattr(644,root,root,755)
@@ -219,8 +216,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pdf*
 %{_mandir}/man1/pdf*
-
-%files gir
-%defattr(644,root,root,755)
-%{_libdir}/girepository-1.0/*.typelib
 
