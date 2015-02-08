@@ -2,12 +2,12 @@
 
 Summary:	PDF rendering library
 Name:		poppler
-Version:	0.26.5
+Version:	0.30.0
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	786c943eee550e3a977c181e7778b1c8
+# Source0-md5:	fb0a9d82b5433c823421a123eb8e9789
 Source1:	http://poppler.freedesktop.org/%{name}-data-%{data_ver}.tar.gz
 # Source1-md5:	636a8f2b9f6df9e7ced8ec0946961eaf
 URL:		http://poppler.freedesktop.org/
@@ -125,6 +125,7 @@ Package contains utilites for PDF files. These utilities allow to
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-libopenjpeg	\
 	--disable-silent-rules	\
 	--disable-static	\
 	--enable-xpdf-headers	\
@@ -140,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} -C %{name}-data-%{data_ver} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	prefix=%{_prefix} \
 	pkgdatadir=%{_datadir}/poppler
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -170,6 +172,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler
 %exclude %{_includedir}/poppler/glib
 %exclude %{_includedir}/poppler/qt4
+%{_npkgconfigdir}/poppler-data.pc
 %{_pkgconfigdir}/poppler-cairo.pc
 %{_pkgconfigdir}/poppler.pc
 %{_pkgconfigdir}/poppler-splash.pc
